@@ -1,65 +1,90 @@
 
 // Search Object
-const searchObject = (obj, match) =>
-{  
-    for (const p in obj)
+const searchObject = (obj, match) => 
+{
+    for (const p in obj) 
     {
         let type = typeof obj[p];
 
         // String
-        if (type === 'string')  
-        {
-            if(obj[p].toLocaleLowerCase().includes(match) === true)
-            {
+        if (type === 'string')
+         {
+            if (obj[p].toLocaleLowerCase().includes(match) === true)
+             {
                 return [obj];
             }
-        } 
+        }
         // Int, Float, Bool, BigInt
-        else if (type === 'number' || type === 'boolean' || type === 'bigint')  
+        else if (type === 'number' || type === 'boolean' || type === 'bigint') 
         {
-            if(obj[p].toString().toLocaleLowerCase().includes(match) === true)
+            if (obj[p].toString().toLocaleLowerCase().includes(match) === true) 
             {
                 return [obj];
             }
         }
         // Object
-        else if (type === 'object')
+        else if (type === 'object') 
         {
             let subResult = searchObject(obj[p], match); // Returns sub object
-            if(subResult !== undefined)
+            if (subResult !== undefined)
             {
                 return obj;
             }
         }
         // Array
-        else if (type === 'array')
+        else if (type === 'array') 
         {
-           return searchArray(obj[p], match);
+            return searchArray(obj[p], match);
         }
     }
 }
 
 // TEST============================================
-let testObj = {name:"Dodo", isLogged: true, id:"2", domains:{domainId:123, domainName: "www.domainOfMine.com", customerId:'324'}}
+let testObj = { name: "Dodo", isLogged: true, id: "2", 
+domains: [
+    { domainId: 123, domainName: "www.domainOfMine.com", customerId: '765' },
+    { domainId: 3456, domainName: "www.domain2.com", customerId: '34' }
+] }
 
-console.log(searchObject(testObj, "123".toLocaleLowerCase()));
+console.log(searchObject(testObj, "3456".toLocaleLowerCase()));
 // TEST END ======================================
 
 
 // Search Array
-const searchArray = (array, match) =>
-{
- 
+const searchArray = (arr, match) =>
+ {
+    let resultArr = [];
+    for (var b = 0; b < arr.length; b++) 
+    {
+        // Object
+        if (typeof arr[b] === 'object') 
+        {
+            let result = searchObject(arr[b], match);
+            if(result !== undefined)
+            { 
+                resultArr.push(result);
+            }
+        }
+        // Array
+        else if (typeof arr[b] === 'array') 
+        {
+          let arrResult = searchArray(arr[b], match);
+          if(arrResult.length !== 0)
+          {
+            resultArr.push(...arrResult);
+          } 
+        }
+    } 
+    return resultArr;
 }
 
 // Search string
-const searchString = (string, match) =>
-{
-  // String
-//   if (typeof arr[b] === 'string' && arr[b].includes(match) === true) // Add int
-//   {
-//       resultArr.push(arr[b]);
-//   }
+const searchString = (string, match) => {
+    // String
+    //   if (typeof arr[b] === 'string' && arr[b].includes(match) === true) // Add int
+    //   {
+    //       resultArr.push(arr[b]);
+    //   }
 }
 
 
@@ -80,7 +105,7 @@ const searchString = (string, match) =>
 //                   }
 //                   else if (typeof arr[b][p] === '')
 //                   {
-                
+
 //                   }
 //               }
 //           }
