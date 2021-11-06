@@ -1,10 +1,11 @@
 
 // Search Object
 const searchObject = (obj, match) =>
-{ 
-    let lMatch = match.toLowerCase(); for (const p in obj)
+{  
+    for (const p in obj)
     {
         let type = typeof obj[p];
+
         // String
         if (type === 'string')  
         {
@@ -21,6 +22,15 @@ const searchObject = (obj, match) =>
                 return [obj];
             }
         }
+        // Object
+        else if (type === 'object')
+        {
+            let subResult = searchObject(obj[p], match); // Returns sub object
+            if(subResult !== undefined)
+            {
+                return obj;
+            }
+        }
         // Array
         else if (type === 'array')
         {
@@ -29,15 +39,17 @@ const searchObject = (obj, match) =>
     }
 }
 
+// TEST============================================
+let testObj = {name:"Dodo", isLogged: true, id:"2", domains:{domainId:123, domainName: "www.domainOfMine.com", customerId:'324'}}
 
-let testObj = {name:"Dodo", isLogged: true, id:"2"}
+console.log(searchObject(testObj, "123".toLocaleLowerCase()));
+// TEST END ======================================
 
-console.log(searchObject(testObj, "dodo".toLocaleLowerCase()));
 
 // Search Array
 const searchArray = (array, match) =>
 {
-
+ 
 }
 
 // Search string
