@@ -11,7 +11,7 @@ const searchObject = (obj, match) =>
          {
             if (obj[p].toLocaleLowerCase().includes(match) === true)
              {
-                return [obj];
+                return obj;
             }
         }
         // Int, Float, Bool, BigInt
@@ -19,7 +19,7 @@ const searchObject = (obj, match) =>
         {
             if (obj[p].toString().toLocaleLowerCase().includes(match) === true) 
             {
-                return [obj];
+                return obj;
             }
         }
         // Object
@@ -30,12 +30,7 @@ const searchObject = (obj, match) =>
             {
                 return obj;
             }
-        }
-        // Array
-        else if (type === 'array') 
-        {
-            return searchArray(obj[p], match);
-        }
+        } 
     }
 }
 
@@ -51,7 +46,7 @@ const searchObject = (obj, match) =>
 //     role:{roleName:'user', roleQuant:[{qName:'Q1', quantity: 5, cNa:{bName:'B1', bArr:[{jk: 9}]}}]} 
 // }
 
-// let resultOBJ = searchObject(testObj, "b1".toLocaleLowerCase());
+// let resultOBJ = searchObject(testObj, "q1".toLocaleLowerCase());
 // console.log(resultOBJ);
 // // TEST END ===OBJ===================================
 
@@ -73,16 +68,7 @@ const searchArray = (arr, match) =>
             { 
                 resultArr.push(result);
             }
-        }
-        // Array
-        else if (typeof arr[b] === 'array') 
-        {
-          let arrResult = searchArray(arr[b], match);
-          if(arrResult.length !== 0)
-          {
-            resultArr.push(...arrResult);
-          } 
-        }
+        } 
     } 
     return resultArr;
 }
@@ -126,7 +112,7 @@ let testArr =
     }
 ];
 
-let resultArr = searchArray(testArr, "345".toLocaleLowerCase());
+let resultArr = searchArray(testArr, "do".toLocaleLowerCase());
 console.log(resultArr);
 // TEST END ======ARR================================
 
@@ -215,3 +201,14 @@ const searchString = (string, match) => {
 
 //        let result = getSearchResult(objArr,'admin');
 //        console.log(result);
+
+
+
+
+
+
+
+
+
+// Fetures to ADD
+//# Ex: "Hej my name" - split the string in words and search each word and get theresult or each word
