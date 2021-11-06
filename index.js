@@ -39,15 +39,24 @@ const searchObject = (obj, match) =>
     }
 }
 
-// TEST============================================
-let testObj = { name: "Dodo", isLogged: true, id: "2", 
-domains: [
-    { domainId: 123, domainName: "www.domainOfMine.com", customerId: '765' },
-    { domainId: 3456, domainName: "www.domain2.com", customerId: '34' }
-] }
+// // TEST=OBJ===========================================
+// let testObj = 
+// { 
+//     name: "Dodo", 
+//     isLogged: true, 
+//     id: "2", 
+//     domains: [
+//     { domainId: 123, domainName: "www.domainOfMine.com", customerId: '765' },
+//     { domainId: 3456, domainName: "www.domain2.com", customerId: '34' }], 
+//     role:{roleName:'user', roleQuant:[{qName:'Q1', quantity: 5, cNa:{bName:'B1', bArr:[{jk: 9}]}}]} 
+// }
 
-console.log(searchObject(testObj, "3456".toLocaleLowerCase()));
-// TEST END ======================================
+// let resultOBJ = searchObject(testObj, "b1".toLocaleLowerCase());
+// console.log(resultOBJ);
+// // TEST END ===OBJ===================================
+
+
+
 
 
 // Search Array
@@ -77,6 +86,78 @@ const searchArray = (arr, match) =>
     } 
     return resultArr;
 }
+
+
+
+
+
+
+
+
+// TEST========ARR====================================
+let testArr = 
+[
+    { 
+    name: "Dodo", 
+    isLogged: true, 
+    id: "2", 
+    domains: [
+    { domainId: 123, domainName: "www.domainOfMine.com", customerId: '765' },
+    { domainId: 687, domainName: "www.domain2.com", customerId: '34' }], 
+    role:{roleName:'user', roleQuant:[{qName:'Q1', quantity: 5, cNa:{bName:'B1', bArr:[{jk: 45}]}}]} 
+    },
+    { 
+        name: "Boby", 
+        isLogged: true, 
+        id: "3", 
+        domains: [
+        { domainId: 123, domainName: "www.dom1.com", customerId: '87' },
+        { domainId: 358456, domainName: "www.dom3.com", customerId: '45' }], 
+        role:{roleName:'user', roleQuant:[{qName:'HJ', quantity: 34, cNa:{bName:'SX1', bArr:[{jk: 9}]}}]} 
+    },
+    { 
+        name: "Didi", 
+        isLogged: true, 
+        id: "4", 
+        domains: [
+        { domainId: 123, domainName: "www.ecomi3.com", customerId: '2321' },
+        { domainId: 3456, domainName: "www.toti.com", customerId: '87' }], 
+        role:{roleName:'user', roleQuant:[{qName:'RT', quantity: 5, cNa:{bName:'L1', bArr:[{jk: 12}]}}]} 
+    }
+];
+
+let resultArr = searchArray(testArr, "345".toLocaleLowerCase());
+console.log(resultArr);
+// TEST END ======ARR================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Search string
 const searchString = (string, match) => {
