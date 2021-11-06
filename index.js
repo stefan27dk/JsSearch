@@ -10,7 +10,7 @@ const searchObject = (obj, match) =>
         if (type === 'string')
          {
             if (obj[p].toLocaleLowerCase().includes(match) === true)
-             {
+            {
                 return obj;
             }
         }
@@ -58,11 +58,11 @@ const searchObject = (obj, match) =>
 const searchArray = (arr, match) =>
  {console.time();
     let resultArr = [];
-
     for (let b = arr.length; b--;) 
     {
+        let type = typeof arr[b];
         // Object
-        if (typeof arr[b] === 'object') 
+        if (type === 'object') 
         {
             let result = searchObject(arr[b], match);
             if(result !== undefined)
@@ -70,6 +70,21 @@ const searchArray = (arr, match) =>
                 resultArr.push(result);
             }
         } 
+        else if (type === 'string')
+        { 
+            if (arr[b].toLocaleLowerCase().includes(match) === true)
+            {
+                resultArr.push({stringValue:arr[b]});
+            }
+        }
+         // Int, Float, Bool, BigInt
+         else if (type === 'number' || type === 'boolean' || type === 'bigint') 
+         {
+             if (arr[b].toString().toLocaleLowerCase().includes(match) === true) 
+             {
+                resultArr.push({[type+'Value']:arr[b]});
+             }
+         }
     } console.timeEnd();
     return resultArr;
 }
@@ -84,6 +99,9 @@ const searchArray = (arr, match) =>
 // TEST========ARR====================================
 let testArr = 
 [
+    "777",
+    6548452,
+    ["wer","yter",{er:"hhh"}],
     { 
     name: "Dodo", 
     isLogged: true, 
@@ -100,7 +118,7 @@ let testArr =
         domains: [
         { domainId: 123, domainName: "www.dom1.com", customerId: '87' },
         { domainId: 358456, domainName: "www.dom3.com", customerId: '45' }], 
-        role:{roleName:'user', roleQuant:[{qName:'HJ', quantity: 34, cNa:{bName:'SX1', bArr:[{jk: 9}]}}]} 
+        role:{roleName:'user', roleQuant:[{qName:'HJ', quantity: 34, cNa:{bName:'SXwer1', bArr:[{jk: 9}]}}]} 
     },
     { 
         name: "Didi", 
@@ -114,7 +132,7 @@ let testArr =
 ];
 
 
-let resultArr = searchArray(testArr, "do".toLocaleLowerCase());
+let resultArr = searchArray(testArr, "wer".toLocaleLowerCase());
 
 
 console.log(resultArr);
