@@ -132,7 +132,7 @@ let testArr =
 ];
 
 
-let resultArr = searchArray(testArr, "wer".toLocaleLowerCase());
+let resultArr = searchArray(testArr, "87".toLocaleLowerCase());
 
 
 console.log(resultArr);
