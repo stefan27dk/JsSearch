@@ -56,9 +56,10 @@ const searchObject = (obj, match) =>
 
 // Search Array
 const searchArray = (arr, match) =>
- {
+ {console.time();
     let resultArr = [];
-    for (var b = 0; b < arr.length; b++) 
+
+    for (let b = arr.length; b--;) 
     {
         // Object
         if (typeof arr[b] === 'object') 
@@ -69,7 +70,7 @@ const searchArray = (arr, match) =>
                 resultArr.push(result);
             }
         } 
-    } 
+    } console.timeEnd();
     return resultArr;
 }
 
@@ -112,7 +113,10 @@ let testArr =
     }
 ];
 
+
 let resultArr = searchArray(testArr, "do".toLocaleLowerCase());
+
+
 console.log(resultArr);
 // TEST END ======ARR================================
 
